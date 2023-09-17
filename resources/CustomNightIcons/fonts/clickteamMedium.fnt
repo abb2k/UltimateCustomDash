@@ -1,0 +1,19 @@
+info aa=1 size=32 smooth=1 stretchH=100 bold=0 padding=0,0,0,0 spacing=1,1 charset="" italic=0 unicode=1 face="Arial" outline=0
+common lineHeight=32 base=26 scaleW=605 scaleH=75 pages=1 packed=0 alphaChnl=1 redChnl=0 greenChnl=0 blueChnl=0
+page id=0 file="clickteamMedium.png"
+chars count=15
+char id=48    x=5     y=0     width=35    height=75    xoffset=0     yoffset=-21.5 xadvance=35    page=0     chnl=15   
+char id=49    x=45    y=0     width=35    height=75    xoffset=0     yoffset=-21.5 xadvance=35    page=0     chnl=15   
+char id=50    x=85    y=0     width=35    height=75    xoffset=0     yoffset=-21.5 xadvance=35    page=0     chnl=15   
+char id=51    x=125   y=0     width=35    height=75    xoffset=0     yoffset=-21.5 xadvance=35    page=0     chnl=15   
+char id=52    x=165   y=0     width=35    height=75    xoffset=0     yoffset=-21.5 xadvance=35    page=0     chnl=15   
+char id=53    x=205   y=0     width=35    height=75    xoffset=0     yoffset=-21.5 xadvance=35    page=0     chnl=15   
+char id=54    x=245   y=0     width=35    height=75    xoffset=0     yoffset=-21.5 xadvance=35    page=0     chnl=15   
+char id=55    x=285   y=0     width=35    height=75    xoffset=0     yoffset=-21.5 xadvance=35    page=0     chnl=15   
+char id=56    x=325   y=0     width=35    height=75    xoffset=0     yoffset=-21.5 xadvance=35    page=0     chnl=15   
+char id=57    x=365   y=0     width=35    height=75    xoffset=0     yoffset=-21.5 xadvance=35    page=0     chnl=15   
+char id=45    x=405   y=0     width=35    height=75    xoffset=0     yoffset=-21.5 xadvance=35    page=0     chnl=15   
+char id=43    x=445   y=0     width=35    height=75    xoffset=0     yoffset=-21.5 xadvance=35    page=0     chnl=15   
+char id=46    x=485   y=0     width=35    height=75    xoffset=0     yoffset=-21.5 xadvance=35    page=0     chnl=15   
+char id=101   x=525   y=0     width=35    height=75    xoffset=0     yoffset=-21.5 xadvance=35    page=0     chnl=15   
+char id=58    x=565   y=0     width=35    height=75    xoffset=0     yoffset=-21.5 xadvance=35    page=0     chnl=15   
