@@ -20,8 +20,8 @@ bool AnimatronicCell::init(std::string animatronicImageName, std::string name, s
     Name = name;
     Discription = discription;
 
-    CellOutline = CCSprite::create("abb2k.UltimateCustomDash/iconCell.png");
-    CellOutlineSelected = CCSprite::create("abb2k.UltimateCustomDash/iconCellSelected.png");
+    CellOutline = CCSprite::create("iconCell.png"_spr);
+    CellOutlineSelected = CCSprite::create("iconCellSelected.png"_spr);
     CellOutlineSelected->setVisible(false);
 
     AnimatronicSprite = CCSprite::create(animatronicPath.c_str());
@@ -116,14 +116,14 @@ bool AnimatronicCell::init(std::string animatronicImageName, std::string name, s
 void AnimatronicCell::UpButton(){
     if (AILevel != 20){
         AILevel += 1;
-        GameSoundManager::sharedManager()->playEffect("abb2k.UltimateCustomDash/click2.wav", 1.0f,1.0f,1.0f);
+        this->addChild(AudioSource::createEffect("click2.mp3"_spr, AudioSource::VolumeChannel::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
     }
 }
 
 void AnimatronicCell::DownButton(){
     if (AILevel != 0){
         AILevel -= 1;
-        GameSoundManager::sharedManager()->playEffect("abb2k.UltimateCustomDash/click2.wav", 1.0f,1.0f,1.0f);
+        this->addChild(AudioSource::createEffect("click2.mp3"_spr, AudioSource::VolumeChannel::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
     }
 }
 
@@ -132,6 +132,7 @@ void AnimatronicCell::OnTouchended(){
     SpeedUpLevelsDown = false;
     SpeedUpLevelsUp = false;
     startingButtonSpeedup = 0.25f;
+    touchDouble = false;
 }
 
 void AnimatronicCell::update(float deltaTime){
@@ -162,13 +163,21 @@ void AnimatronicCell::update(float deltaTime){
         }
         isHovering = true;
         this->setZOrder(2);
-        CellOutlineSelected->setVisible(true);
-        CellOutline->setVisible(false);
+        if (mainLayer->_creditsLayer == nullptr){
+            if (mainLayer->_settingsLayer == nullptr){
+                CellOutlineSelected->setVisible(true);
+                CellOutline->setVisible(false);
+            }
+        }
         if (mainLayer->_officeLayer == nullptr){
             if (mainLayer->_PowerUpsLayer == nullptr){
                 if (mainLayer->_challenges == nullptr){
-                    buttonDownspr->setVisible(true);
-                    buttonUpspr->setVisible(true);
+                    if (mainLayer->_creditsLayer == nullptr){
+                        if (mainLayer->_settingsLayer == nullptr){
+                            buttonDownspr->setVisible(true);
+                            buttonUpspr->setVisible(true);
+                        }
+                    }
                 }
             }
         }
@@ -241,6 +250,15 @@ void AnimatronicCell::update(float deltaTime){
             DownButton();
             buttonHoldTimeDelay = 0.025f;
         }
+    }
+
+    if (getTouchOnDouble(buttonUpspr)){
+        AILevel = 20;
+        this->addChild(AudioSource::createEffect("blip.mp3"_spr, AudioSource::VolumeChannel::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
+    }
+    if (getTouchOnDouble(buttonDownspr)){
+        AILevel = 0;
+        this->addChild(AudioSource::createEffect("blip.mp3"_spr, AudioSource::VolumeChannel::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
     }
 
     if (!mainLayer->clicking){
@@ -362,15 +380,19 @@ void AnimatronicCell::getHoverEnter(){
     customNightLayer* mainLayer = (customNightLayer*)parentContainer->dad;
 
     if (mainLayer->_MenuSideBar->UsingcharInfo){
-        discripBox = discriptionBox::create(Name, Discription);
-        if (!lastInRow){
-            discripBox->setPosition({55,0});
-        }
-        else {
-            discripBox->setPosition({-55,0});
-        }
+        if (mainLayer->_creditsLayer == nullptr){
+            if (mainLayer->_settingsLayer == nullptr){
+                discripBox = discriptionBox::create(Name, Discription);
+                if (!lastInRow){
+                    discripBox->setPosition({55,0});
+                }
+                else {
+                    discripBox->setPosition({-55,0});
+                }
 
-        this->addChild(discripBox);
+                this->addChild(discripBox);
+            }
+        }
     }
 }
 
@@ -379,6 +401,28 @@ void AnimatronicCell::getHoverExit(){
     customNightLayer* mainLayer = (customNightLayer*)parentContainer->dad;
 
     if (mainLayer->_MenuSideBar->UsingcharInfo){
-        discripBox->removeMeAndCleanup();
+        if (discripBox != nullptr){
+            discripBox->removeMeAndCleanup();
+            discripBox = nullptr;
+        }
     }
+}
+
+bool AnimatronicCell::getTouchOnDouble(CCNode* node){
+    AnimatronicCellContainer* parentContainer = (AnimatronicCellContainer*)parent;
+    customNightLayer* mainLayer = (customNightLayer*)parentContainer->dad;
+
+    if (mainLayer->clicking && !touchDouble){
+        if (getHover(node)){
+            touchDouble = true;
+
+            if (mainLayer->doubleClickTimer <= 0){
+                mainLayer->doubleClickTimer = 0.2f;
+            }
+            else {
+                return true;
+            }  
+        }
+    }
+    return false;
 }

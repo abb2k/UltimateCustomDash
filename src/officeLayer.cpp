@@ -19,6 +19,10 @@ bool officeLayer::init(CCNode* _mainlayer){
 
     customNightLayer* mainlayer = (customNightLayer*)dad;
 
+    CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(mainlayer);
+    mainlayer->clicking = false;
+    mainlayer->oneTimeClick = false;
+
     CCSprite* bg = CCSprite::create("abb2k.UltimateCustomDash/sidebarBG.png");
     bg->setPosition({526, 161});
     bg->setScaleX(1.175f);
@@ -107,7 +111,7 @@ bool officeLayer::init(CCNode* _mainlayer){
 
     this->setTouchMode(kCCTouchesOneByOne);
     this->setTouchEnabled(true);
-    this->setTouchPriority(1);
+    this->setTouchPriority(100);
     setKeypadEnabled(true);
 
     scheduleUpdate();
@@ -129,7 +133,7 @@ void officeLayer::update(float delta){
 
     if (getTouchOn(defaultOffice)){
         mainlayer->OfficeSelected = 0;
-        GameSoundManager::sharedManager()->playEffect("abb2k.UltimateCustomDash/nosepush.wav", 1.0f,1.0f,1.0f);
+        this->addChild(AudioSource::createEffect("Office Equipment_NF060059_371612.mp3"_spr, AudioSource::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
     }
 
     if (mainlayer->_MenuSideBar->highScore < 2000){
@@ -142,7 +146,7 @@ void officeLayer::update(float delta){
 
         if (getTouchOn(fnafSisLocOffice)){
             mainlayer->OfficeSelected = 1;
-            GameSoundManager::sharedManager()->playEffect("abb2k.UltimateCustomDash/nosepush.wav", 1.0f,1.0f,1.0f);
+            this->addChild(AudioSource::createEffect("Office Equipment_NF060059_371612.mp3"_spr, AudioSource::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
         }
     }
 
@@ -156,7 +160,7 @@ void officeLayer::update(float delta){
 
         if (getTouchOn(fnaf3Office)){
             mainlayer->OfficeSelected = 2;
-            GameSoundManager::sharedManager()->playEffect("abb2k.UltimateCustomDash/nosepush.wav", 1.0f,1.0f,1.0f);
+            this->addChild(AudioSource::createEffect("Office Equipment_NF060059_371612.mp3"_spr, AudioSource::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
         }
     }
 
@@ -170,7 +174,7 @@ void officeLayer::update(float delta){
 
         if (getTouchOn(fnaf4Office)){
             mainlayer->OfficeSelected = 3;
-            GameSoundManager::sharedManager()->playEffect("abb2k.UltimateCustomDash/nosepush.wav", 1.0f,1.0f,1.0f);
+            this->addChild(AudioSource::createEffect("Office Equipment_NF060059_371612.mp3"_spr, AudioSource::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
         }
     }
 
@@ -178,8 +182,13 @@ void officeLayer::update(float delta){
 
 void officeLayer::keyBackClicked() {
     customNightLayer* mainLayer = (customNightLayer*)dad;
+
+    CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(static_cast<CCLayer*>(mainLayer), 10, true);
+    mainLayer->setTouchEnabled(true);
+    handleTouchPriority(mainLayer);
+
     mainLayer->_officeLayer = nullptr;
-    GameSoundManager::sharedManager()->playEffect("abb2k.UltimateCustomDash/blip.wav", 1.0f,1.0f,1.0f);
+    mainLayer->addChild(AudioSource::createEffect("blip.mp3"_spr, AudioSource::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
 
     this->removeMeAndCleanup();
 }

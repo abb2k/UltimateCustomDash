@@ -7,7 +7,7 @@
 #include "customNightLayer.h"
 
 using namespace std;
-AnimatronicCellContainer* AnimatronicCellContainer::create(AnimatronicCell* animatronicCells[], int CellArrayLength, int cellsPerRow, int endOfRowLength) {
+AnimatronicCellContainer* AnimatronicCellContainer::create(std::vector<AnimatronicCell*> animatronicCells, int CellArrayLength, int cellsPerRow, int endOfRowLength) {
     auto ret = new AnimatronicCellContainer();
     if (ret && ret->init(animatronicCells, CellArrayLength, cellsPerRow,endOfRowLength)) {
         ret->autorelease();
@@ -18,7 +18,7 @@ AnimatronicCellContainer* AnimatronicCellContainer::create(AnimatronicCell* anim
     return ret;
 }
 
-bool AnimatronicCellContainer::init(AnimatronicCell* animatronicCells[], int CellArrayLength, int cellsPerRow, int endOfRowLength){
+bool AnimatronicCellContainer::init(std::vector<AnimatronicCell*> animatronicCells, int CellArrayLength, int cellsPerRow, int endOfRowLength){
 
     int currentRowCount = 0;
     int downAmount = 0;
@@ -136,8 +136,12 @@ void AnimatronicCellContainer::SetAll(int num){
         if (i != 0){
             if ((AnimatronicCell*)this->getChildren()->objectAtIndex(i) != nullptr){
                 AnimatronicCell* thisone = (AnimatronicCell*)this->getChildren()->objectAtIndex(i);
-
-                thisone->AILevel = num;
+                if (num >= 0){
+                    thisone->AILevel = num;
+                }
+                else {
+                    thisone->AILevel = rand() % 21;
+                }
 
                 //this->getChildren()->index = thisone;
             

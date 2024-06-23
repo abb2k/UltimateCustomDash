@@ -3,8 +3,7 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**",
-                "D:\\Amitay\\Documents\\geodeStuff\\abb2k\\libraries\\VideoPlayer\\include"
+                "${workspaceFolder}/**"
             ],
             "defines": [
                 "_DEBUG",

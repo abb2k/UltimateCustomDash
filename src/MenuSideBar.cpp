@@ -4,6 +4,8 @@
 #include "officeLayer.h"
 #include "PowerUpsLayer.h"
 #include "challenges.h"
+#include "CNGameLayer.h"
+#include "creditsLayer.h"
 
 MenuSideBar* MenuSideBar::create() {
     auto ret = new MenuSideBar();
@@ -19,125 +21,129 @@ MenuSideBar* MenuSideBar::create() {
 
 bool MenuSideBar::init() { 
 
-    pointValue = CCLabelBMFont::create("0", "abb2k.UltimateCustomDash/clickteamBig.fnt", 300, CCTextAlignment::kCCTextAlignmentRight);
+    pointValue = CCLabelBMFont::create("0", "clickteamBig.fnt"_spr, 300, CCTextAlignment::kCCTextAlignmentRight);
     pointValue->setAnchorPoint(ccp(1.0f,0.5f)); // right align
-    pointValue->setScale(0.9f);
-    pointValue->setPosition({42,-16});
+    pointValue->setScale(0.85f);
+    pointValue->setPosition({42,-25});
 
     this->addChild(pointValue);
 
     std::string highScoreTextString = std::to_string(highScore);
-    highScoreText = CCLabelBMFont::create(highScoreTextString.c_str(), "abb2k.UltimateCustomDash/clickteamBig.fnt", 300, CCTextAlignment::kCCTextAlignmentRight);
+    highScoreText = CCLabelBMFont::create(highScoreTextString.c_str(), "clickteamBig.fnt"_spr, 300, CCTextAlignment::kCCTextAlignmentRight);
     highScoreText->setAnchorPoint(ccp(1.0f,0.5f)); // right align
-    highScoreText->setScale(0.8f);
-    highScoreText->setPosition({39,-49});
+    highScoreText->setScale(0.575f);
+    highScoreText->setPosition({39,-54});
 
     this->addChild(highScoreText);
 
-    Best5020timetext = CCLabelBMFont::create("00:00.00", "abb2k.UltimateCustomDash/clickteamMedium.fnt", 300, CCTextAlignment::kCCTextAlignmentRight);
+    UsingcharInfo = Mod::get()->getSavedValue<bool>("Show_Character_Descriptions", true);
+    UsingVisualeffects = Mod::get()->getSavedValue<bool>("Visual_Effects", true);
+
+    Best5020timetext = CCLabelBMFont::create("0:00.0", "clickteamMedium.fnt"_spr, 300, CCTextAlignment::kCCTextAlignmentRight);
     Best5020timetext->setAnchorPoint(ccp(1.0f,0.5f)); // right align
     Best5020timetext->setScale(0.5f);
     Best5020timetext->setPosition({32,-77});
 
     this->addChild(Best5020timetext);
 
-    setAll0 = CCSprite::create("abb2k.UltimateCustomDash/setall0Off.png");
+    setAll0 = CCSprite::create("setall0Off.png"_spr);
     setAll0->setPosition({0, 149});
     setAll0->setScale(1.15f);
 
-    setAll0On = CCSprite::create("abb2k.UltimateCustomDash/setall0On.png");
+    setAll0On = CCSprite::create("setall0On.png"_spr);
     setAll0On->setPosition({0, 149});
     setAll0On->setScale(1.15f);
     setAll0On->setVisible(false);
 
-    addAll1 = CCSprite::create("abb2k.UltimateCustomDash/addall1Off.png");
+    addAll1 = CCSprite::create("addall1Off.png"_spr);
     addAll1->setPosition({0, 127});
     addAll1->setScale(1.15f);
 
-    addAll1On = CCSprite::create("abb2k.UltimateCustomDash/addall1On.png");
+    addAll1On = CCSprite::create("addall1On.png"_spr);
     addAll1On->setPosition({0, 127});
     addAll1On->setScale(1.15f);
     addAll1On->setVisible(false);
 
-    setAll5 = CCSprite::create("abb2k.UltimateCustomDash/setall5Off.png");
+    setAll5 = CCSprite::create("setall5Off.png"_spr);
     setAll5->setPosition({0, 105});
     setAll5->setScale(1.15f);
 
-    setAll5On = CCSprite::create("abb2k.UltimateCustomDash/setall5On.png");
+    setAll5On = CCSprite::create("setall5On.png"_spr);
     setAll5On->setPosition({0, 105});
     setAll5On->setScale(1.15f);
     setAll5On->setVisible(false);
 
-    setAll10 = CCSprite::create("abb2k.UltimateCustomDash/setall10Off.png");
+    setAll10 = CCSprite::create("setall10Off.png"_spr);
     setAll10->setPosition({0, 83});
     setAll10->setScale(1.15f);
 
-    setAll10On = CCSprite::create("abb2k.UltimateCustomDash/setall10On.png");
+    setAll10On = CCSprite::create("setall10On.png"_spr);
     setAll10On->setPosition({0, 83});
     setAll10On->setScale(1.15f);
     setAll10On->setVisible(false);
 
-    setAll20 = CCSprite::create("abb2k.UltimateCustomDash/setall20Off.png");
+    setAll20 = CCSprite::create("setall20Off.png"_spr);
     setAll20->setPosition({0, 61});
     setAll20->setScale(1.15f);
 
-    setAll20On = CCSprite::create("abb2k.UltimateCustomDash/setall20On.png");
+    setAll20On = CCSprite::create("setall20On.png"_spr);
     setAll20On->setPosition({0, 61});
     setAll20On->setScale(1.15f);
     setAll20On->setVisible(false);
 
-    office = CCSprite::create("abb2k.UltimateCustomDash/Office.png");
-    office->setPosition({0, 42});
+    setAllRandom = CCSprite::create("setallRandomOff.png"_spr);
+    setAllRandom->setPosition({0, 43});
+    setAllRandom->setScale(1.15f);
 
-    powerUps = CCSprite::create("abb2k.UltimateCustomDash/powerUps.png");
-    powerUps->setPosition({0, 31});
+    setAllRandomOn = CCSprite::create("setallRandomOn.png"_spr);
+    setAllRandomOn->setPosition({0, 43});
+    setAllRandomOn->setScale(1.15f);
+    setAllRandomOn->setVisible(false);
 
-    challengesS = CCSprite::create("abb2k.UltimateCustomDash/Challanges.png");
-    challengesS->setPosition({0, 15});
+    settingsButton = CCSprite::create("settingButtOff.png"_spr);
+    settingsButton->setScale(0.6f);
+    settingsButton->setPosition({21, -95});
 
-    pointValueText = CCSprite::create("abb2k.UltimateCustomDash/pointVal.png");
-    pointValueText->setPosition({-4, 1});
+    settingsButtonOn = CCSprite::create("settingButtOn.png"_spr);
+    settingsButtonOn->setScale(0.6f);
+    settingsButtonOn->setPosition({21, -95});
+    settingsButtonOn->setVisible(false);
 
-    HighScore = CCSprite::create("abb2k.UltimateCustomDash/highS.png");
-    HighScore->setPosition({-4, -33});
+    creditsButton = CCSprite::create("creditsButtOff.png"_spr);
+    creditsButton->setScaleX(1.075f);
+    creditsButton->setScaleY(1.275f);
+    creditsButton->setPosition({-13, -99.5f});
 
-    bestTimeText = CCSprite::create("abb2k.UltimateCustomDash/btt.png");
-    bestTimeText->setPosition({-2, -66});
+    creditsButtonOn = CCSprite::create("creditsButtOn.png"_spr);
+    creditsButtonOn->setScaleX(1.075f);
+    creditsButtonOn->setScaleY(1.275f);
+    creditsButtonOn->setPosition({-13, -99.5f});
+    creditsButtonOn->setVisible(false);
+
+    office = CCSprite::create("Office.png"_spr);
+    office->setPosition({0, 27});
+
+    powerUps = CCSprite::create("powerUps.png"_spr);
+    powerUps->setPosition({0, 15});
+
+    challengesS = CCSprite::create("Challanges.png"_spr);
+    challengesS->setPosition({0, 3});
+
+    pointValueText = CCSprite::create("pointVal.png"_spr);
+    pointValueText->setPosition({-4, -9});
+
+    HighScore = CCSprite::create("highS.png"_spr);
+    HighScore->setPosition({-4, -42});
+
+    bestTimeText = CCSprite::create("btt.png"_spr);
+    bestTimeText->setPosition({-2, -68});
     bestTimeText->setScale(1.1f);
-
-    showCharInfoText = CCSprite::create("abb2k.UltimateCustomDash/charInfo.png");
-    showCharInfoText->setPosition({-24, -90});
-    showCharInfoText->setScale(1.1f);
-
-    showCharInfo = CCSprite::create("abb2k.UltimateCustomDash/togglesOff.png");
-    showCharInfo->setPosition({-7, -91});
-    showCharInfo->setVisible(!UsingcharInfo);
-
-    showCharInfoOn = CCSprite::create("abb2k.UltimateCustomDash/togglesOnV.png");
-    showCharInfoOn->setPosition({-7, -91});
-    showCharInfoOn->setVisible(UsingcharInfo);
-
-    visualEffectsText = CCSprite::create("abb2k.UltimateCustomDash/visualEffects.png");
-    visualEffectsText->setPosition({12, -90});
-    visualEffectsText->setScale(1.1f);
-
-    visualEffects = CCSprite::create("abb2k.UltimateCustomDash/togglesOff.png");
-    visualEffects->setPosition({26, -91});
-    visualEffects->setVisible(!UsingVisualeffects);
-
-    visualEffectsOn = CCSprite::create("abb2k.UltimateCustomDash/togglesOnV.png");
-    visualEffectsOn->setPosition({26, -91});
-    visualEffectsOn->setVisible(UsingVisualeffects);
-
-    holdDelToErace = CCSprite::create("abb2k.UltimateCustomDash/del.png");
-    holdDelToErace->setPosition({0, -102});
-    holdDelToErace->setScale(1.15f);
-
-    GO = CCSprite::create("abb2k.UltimateCustomDash/goMediumOff.png");
+    
+    GO = CCSprite::create("goMediumOff.png"_spr);
     GO->setPosition({0, -130});
     GO->setScale(1.1f);
 
-    GOOn = CCSprite::create("abb2k.UltimateCustomDash/goMediumOn.png");
+    GOOn = CCSprite::create("goMediumOn.png"_spr);
     GOOn->setPosition({0, -130});
     GOOn->setScale(1.1f);
     GOOn->setVisible(false);
@@ -147,11 +153,17 @@ bool MenuSideBar::init() {
     this->addChild(setAll5);
     this->addChild(setAll10);
     this->addChild(setAll20);
+    this->addChild(setAllRandom);
+    this->addChild(settingsButton);
+    this->addChild(creditsButton);
     this->addChild(setAll0On);
     this->addChild(addAll1On);
     this->addChild(setAll5On);
     this->addChild(setAll10On);
     this->addChild(setAll20On);
+    this->addChild(setAllRandomOn);
+    this->addChild(settingsButtonOn);
+    this->addChild(creditsButtonOn);
 
     this->addChild(office);
     this->addChild(powerUps);
@@ -159,13 +171,6 @@ bool MenuSideBar::init() {
     this->addChild(pointValueText);
     this->addChild(HighScore);
     this->addChild(bestTimeText);
-    this->addChild(showCharInfoText);
-    this->addChild(showCharInfo);
-    this->addChild(showCharInfoOn);
-    this->addChild(visualEffectsText);
-    this->addChild(visualEffects);
-    this->addChild(visualEffectsOn);
-    this->addChild(holdDelToErace);
     this->addChild(GO);
     this->addChild(GOOn);
 
@@ -178,8 +183,13 @@ bool MenuSideBar::init() {
 
 void MenuSideBar::update(float delta){
     if (getHover(GO)){
-        GO->setVisible(false);
-        GOOn->setVisible(true);
+        customNightLayer* mainLayer = (customNightLayer*)dad;
+        if (mainLayer->_creditsLayer == nullptr){
+            if (mainLayer->_settingsLayer == nullptr){
+                GO->setVisible(false);
+                GOOn->setVisible(true);
+            }
+        }
     }
     else {
         GO->setVisible(true);
@@ -193,7 +203,7 @@ void MenuSideBar::update(float delta){
         customNightLayer* mainLayer = (customNightLayer*)dad;
 
         mainLayer->_AnimatronicCellContainer->SetAll(0);
-        GameSoundManager::sharedManager()->playEffect("abb2k.UltimateCustomDash/blip.wav", 1.0f,1.0f,1.0f);
+        this->addChild(AudioSource::createEffect("blip.mp3"_spr, AudioSource::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
         setToFalse = 0.1f;
     }
 
@@ -205,7 +215,7 @@ void MenuSideBar::update(float delta){
 
         mainLayer->_AnimatronicCellContainer->AddAll(1);
 
-        GameSoundManager::sharedManager()->playEffect("abb2k.UltimateCustomDash/blip.wav", 1.0f,1.0f,1.0f);
+        this->addChild(AudioSource::createEffect("blip.mp3"_spr, AudioSource::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
         setToFalse = 0.1f;
     }
 
@@ -217,7 +227,7 @@ void MenuSideBar::update(float delta){
 
         mainLayer->_AnimatronicCellContainer->SetAll(5);
 
-        GameSoundManager::sharedManager()->playEffect("abb2k.UltimateCustomDash/blip.wav", 1.0f,1.0f,1.0f);
+        this->addChild(AudioSource::createEffect("blip.mp3"_spr, AudioSource::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
         setToFalse = 0.1f;
     }
 
@@ -229,7 +239,7 @@ void MenuSideBar::update(float delta){
 
         mainLayer->_AnimatronicCellContainer->SetAll(10);
 
-        GameSoundManager::sharedManager()->playEffect("abb2k.UltimateCustomDash/blip.wav", 1.0f,1.0f,1.0f);
+        this->addChild(AudioSource::createEffect("blip.mp3"_spr, AudioSource::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
         setToFalse = 0.1f;
     }
 
@@ -241,7 +251,49 @@ void MenuSideBar::update(float delta){
 
         mainLayer->_AnimatronicCellContainer->SetAll(20);
 
-        GameSoundManager::sharedManager()->playEffect("abb2k.UltimateCustomDash/blip.wav", 1.0f,1.0f,1.0f);
+        this->addChild(AudioSource::createEffect("blip.mp3"_spr, AudioSource::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
+        setToFalse = 0.1f;
+    }
+
+    if (getTouchOn(setAllRandom)){
+        setAllRandom->setVisible(false);
+        setAllRandomOn->setVisible(true);
+
+        customNightLayer* mainLayer = (customNightLayer*)dad;
+
+        mainLayer->_AnimatronicCellContainer->SetAll(-1);
+
+        this->addChild(AudioSource::createEffect("blip.mp3"_spr, AudioSource::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
+        setToFalse = 0.1f;
+    }
+
+    if (getTouchOn(settingsButton)){
+        settingsButton->setVisible(false);
+        settingsButtonOn->setVisible(true);
+
+        customNightLayer* mainLayer = (customNightLayer*)dad;
+
+        settingsLayer* sLayer = settingsLayer::create(dad, this);
+        dad->getParent()->addChild(sLayer);
+        sLayer->setZOrder(10);
+        mainLayer->_settingsLayer = sLayer;
+
+        this->addChild(AudioSource::createEffect("blip.mp3"_spr, AudioSource::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
+        setToFalse = 0.1f;
+    }
+
+    if (getTouchOn(creditsButton)){
+        creditsButton->setVisible(false);
+        creditsButtonOn->setVisible(true);
+
+        customNightLayer* mainLayer = (customNightLayer*)dad;
+
+        creditsLayer* cLayer = creditsLayer::create(dad);
+        dad->getParent()->addChild(cLayer);
+        cLayer->setZOrder(10);
+        mainLayer->_creditsLayer = cLayer;
+
+        this->addChild(AudioSource::createEffect("blip.mp3"_spr, AudioSource::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
         setToFalse = 0.1f;
     }
 
@@ -263,36 +315,19 @@ void MenuSideBar::update(float delta){
 
         setAll20->setVisible(true);
         setAll20On->setVisible(false);
-    }
 
-    if (getTouchOn(showCharInfo)){
-        if (UsingcharInfo){
-            UsingcharInfo = false;
-            showCharInfo->setVisible(true);
-            showCharInfoOn->setVisible(false);
-        }
-        else{
-            UsingcharInfo = true;
-            showCharInfo->setVisible(false);
-            showCharInfoOn->setVisible(true);
-        }
-    }
+        setAllRandom->setVisible(true);
+        setAllRandomOn->setVisible(false);
 
-    if (getTouchOn(visualEffects)){
-        if (UsingVisualeffects){
-            UsingVisualeffects = false;
-            visualEffects->setVisible(true);
-            visualEffectsOn->setVisible(false);
-        }
-        else{
-            UsingVisualeffects = true;
-            visualEffects->setVisible(false);
-            visualEffectsOn->setVisible(true);
-        }
+        settingsButton->setVisible(true);
+        settingsButtonOn->setVisible(false);
+
+        creditsButton->setVisible(true);
+        creditsButtonOn->setVisible(false);
     }
 
     if (getTouchOn(office)){
-        GameSoundManager::sharedManager()->playEffect("abb2k.UltimateCustomDash/blip.wav", 1.0f,1.0f,1.0f);
+        this->addChild(AudioSource::createEffect("blip.mp3"_spr, AudioSource::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
         officeLayer* office = officeLayer::create(dad);
         dad->getParent()->addChild(office);
         office->setZOrder(10);
@@ -301,7 +336,7 @@ void MenuSideBar::update(float delta){
     }
 
     if (getTouchOn(powerUps)){
-        GameSoundManager::sharedManager()->playEffect("abb2k.UltimateCustomDash/blip.wav", 1.0f,1.0f,1.0f);
+        this->addChild(AudioSource::createEffect("blip.mp3"_spr, AudioSource::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
         PowerUpsLayer* PowerUps = PowerUpsLayer::create(dad);
         dad->getParent()->addChild(PowerUps);
         PowerUps->setZOrder(10);
@@ -310,12 +345,48 @@ void MenuSideBar::update(float delta){
     }
 
     if (getTouchOn(challengesS)){
-        GameSoundManager::sharedManager()->playEffect("abb2k.UltimateCustomDash/blip.wav", 1.0f,1.0f,1.0f);
+        this->addChild(AudioSource::createEffect("blip.mp3"_spr, AudioSource::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
         challenges* chal = challenges::create(dad);
         dad->getParent()->addChild(chal);
         chal->setZOrder(10);
         customNightLayer* mainLayer = (customNightLayer*)dad;
         mainLayer->_challenges = chal;
+    }
+
+    customNightLayer* mainLayer = (customNightLayer*)dad;
+    if (getTouchOn(GO) && !goClicked){
+        
+        goClicked = true;
+        mainLayer->FadeActive = false;
+        mainLayer->clicking = false;
+        mainLayer->oneTimeClick = false;
+    }
+
+    if (goClicked && mainLayer->isTransitionReady){
+        goClicked = false;
+        int currentSet = 0;
+        mainLayer->_AnimatronicCellContainer->allAnimatronics.clear();
+        for (int i = 0; i < (int)mainLayer->_AnimatronicCellContainer->getChildren()->count(); i++)
+        {
+            if (i != 0){
+                if ((AnimatronicCell*)mainLayer->_AnimatronicCellContainer->getChildren()->objectAtIndex(i) != nullptr){
+                    AnimatronicCell* thisone = (AnimatronicCell*)mainLayer->_AnimatronicCellContainer->getChildren()->objectAtIndex(i);
+
+                    animatronic* currAnima = new animatronic(thisone->Name, thisone->AILevel);
+
+                    mainLayer->_AnimatronicCellContainer->allAnimatronics.insert(mainLayer->_AnimatronicCellContainer->allAnimatronics.begin(), currAnima);
+
+                    currentSet++;
+                }
+            }
+        }
+
+        if (mainLayer->bgMusic != nullptr){
+            mainLayer->bgMusic->RemoveMeAndCleanUpSound();
+            mainLayer->bgMusic = nullptr;
+        }  
+
+        CNGameLayer::create(mainLayer->_AnimatronicCellContainer->allAnimatronics, mainLayer->OfficeSelected, frigidActive, threeCoinsActive, batteryActive, DDRepelActive)->EnterLayer(mainLayer->_AnimatronicCellContainer->allAnimatronics, mainLayer->OfficeSelected, frigidActive, threeCoinsActive, batteryActive, DDRepelActive);
     }
 
     std::string message = std::to_string(OverallPoints);

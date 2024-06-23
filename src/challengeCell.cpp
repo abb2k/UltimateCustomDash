@@ -40,7 +40,7 @@ void challengeCell::update(float delta){
 
     if (parentNode->getTouchOn(button)){
         customNightLayer* mainLayer = (customNightLayer*)parentNode->dad;
-        GameSoundManager::sharedManager()->playEffect("abb2k.UltimateCustomDash/blip.wav", 1.0f,1.0f,1.0f);
+        FMODAudioEngine::sharedEngine()->playEffect("blip.mp3"_spr, 1.0f,1.0f,1.0f);
         selected = true;
         mainLayer->_AnimatronicCellContainer->SetAll(0);
         for (size_t i = 0; i < chaSave.size(); i++)

@@ -19,6 +19,10 @@ bool PowerUpsLayer::init(CCNode* _mainlayer){
 
     customNightLayer* mainlayer = (customNightLayer*) dad;
 
+    CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(mainlayer);
+    mainlayer->clicking = false;
+    mainlayer->oneTimeClick = false;
+
     CCSprite* bg = CCSprite::create("abb2k.UltimateCustomDash/sidebarBG.png");
     bg->setPosition({526, 161});
     bg->setScaleX(1.175f);
@@ -138,7 +142,7 @@ void PowerUpsLayer::update(float delta){
 
     if (getTouchOn(frigidS)){
         if (mainlayer->_MenuSideBar->frigids > 0){
-            GameSoundManager::sharedManager()->playEffect("abb2k.UltimateCustomDash/nosepush.wav", 1.0f,1.0f,1.0f);
+            this->addChild(AudioSource::createEffect("nosepush.mp3"_spr, AudioSource::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
             if (mainlayer->_MenuSideBar->frigidActive){
                 mainlayer->_MenuSideBar->frigidActive = false;
                 frigidSOutline->setVisible(mainlayer->_MenuSideBar->frigidActive);
@@ -152,7 +156,7 @@ void PowerUpsLayer::update(float delta){
 
     if (getTouchOn(threeCoinsS)){
         if (mainlayer->_MenuSideBar->threeCoins > 0){
-            GameSoundManager::sharedManager()->playEffect("abb2k.UltimateCustomDash/nosepush.wav", 1.0f,1.0f,1.0f);
+            this->addChild(AudioSource::createEffect("nosepush.mp3"_spr, AudioSource::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
             if (mainlayer->_MenuSideBar->threeCoinsActive){
                 mainlayer->_MenuSideBar->threeCoinsActive = false;
                 threeCoinsSOutline->setVisible(mainlayer->_MenuSideBar->threeCoinsActive);
@@ -166,7 +170,7 @@ void PowerUpsLayer::update(float delta){
 
     if (getTouchOn(batteryS)){
         if (mainlayer->_MenuSideBar->batterys > 0){
-            GameSoundManager::sharedManager()->playEffect("abb2k.UltimateCustomDash/nosepush.wav", 1.0f,1.0f,1.0f);
+            this->addChild(AudioSource::createEffect("nosepush.mp3"_spr, AudioSource::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
             if (mainlayer->_MenuSideBar->batteryActive){
                 mainlayer->_MenuSideBar->batteryActive = false;
                 batterySOutline->setVisible(mainlayer->_MenuSideBar->batteryActive);
@@ -180,7 +184,7 @@ void PowerUpsLayer::update(float delta){
 
         if (getTouchOn(DDRepelS)){
         if (mainlayer->_MenuSideBar->DDRepels > 0){
-            GameSoundManager::sharedManager()->playEffect("abb2k.UltimateCustomDash/nosepush.wav", 1.0f,1.0f,1.0f);
+            this->addChild(AudioSource::createEffect("nosepush.mp3"_spr, AudioSource::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
             if (mainlayer->_MenuSideBar->DDRepelActive){
                 mainlayer->_MenuSideBar->DDRepelActive = false;
                 DDRepelSOutline->setVisible(mainlayer->_MenuSideBar->DDRepelActive);
@@ -195,8 +199,13 @@ void PowerUpsLayer::update(float delta){
 
 void PowerUpsLayer::keyBackClicked() {
     customNightLayer* mainLayer = (customNightLayer*)dad;
+
+    CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(static_cast<CCLayer*>(mainLayer), 10, true);
+    mainLayer->setTouchEnabled(true);
+    handleTouchPriority(mainLayer);
+
     mainLayer->_PowerUpsLayer = nullptr;
-    GameSoundManager::sharedManager()->playEffect("abb2k.UltimateCustomDash/blip.wav", 1.0f,1.0f,1.0f);
+    mainLayer->addChild(AudioSource::createEffect("blip.mp3"_spr, AudioSource::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
 
     this->removeMeAndCleanup();
 }

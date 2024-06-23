@@ -33,13 +33,17 @@ public:
     CCSprite* buttonUpspr;
     CCSprite* buttonDownspr;
 
+    bool getTouchOnDouble(CCNode*);
+
     CCLayer* parent;
 
-    discriptionBox* discripBox;
+    discriptionBox* discripBox = nullptr;;
 
     bool isHovering = false;
 
     bool lastInRow = false;
+
+    bool touchDouble;
 
     std::string Discription;
     std::string Name;

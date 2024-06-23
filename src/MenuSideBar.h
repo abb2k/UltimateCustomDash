@@ -60,6 +60,15 @@ public:
     CCSprite* setAll20;
     CCSprite* setAll20On;
 
+    CCSprite* setAllRandom;
+    CCSprite* setAllRandomOn;
+
+    CCSprite* settingsButton;
+    CCSprite* settingsButtonOn;
+
+    CCSprite* creditsButton;
+    CCSprite* creditsButtonOn;
+
     CCSprite* office;
 
     CCSprite* powerUps;
@@ -72,16 +81,9 @@ public:
 
     CCSprite* bestTimeText;
 
-    CCSprite* showCharInfoText;
-    CCSprite* showCharInfo;
-    CCSprite* showCharInfoOn;
-
-    CCSprite* visualEffectsText;
-    CCSprite* visualEffects;
-    CCSprite* visualEffectsOn;
-
-    CCSprite* holdDelToErace;
-
     CCSprite* GO;
     CCSprite* GOOn;
+
+    float currentVolume;
+    bool goClicked;
 };

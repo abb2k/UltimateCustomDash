@@ -13,59 +13,63 @@ customNightLayer* customNightLayer::create() {
     return ret;
 }
 
-bool customNightLayer::init() { 
-    
-    _AnimatronicCellContainer = AnimatronicCellContainer::create(new AnimatronicCell*[]{
-        AnimatronicCell::create("Freddy_Fazbear.png", "Freddy Fazbear", "He approaches from  the left hall. Keep track of him on the monitor and shut the door when he is standing in the doorway. He moves faster as the building gets warmer"),
-        AnimatronicCell::create("Bonnie.png", "Bonnie", "He now shares Pirate Cove with Foxy, but whereas Foxy will hide from himself when viewed on camera, Bonnie will do the opposite, and become more agitated. View the figurine on the desk to see who is active in Pirate's Cove."),
-        AnimatronicCell::create("Chica.png", "Chica", "While Chica doesn't care if the music box is wound up, she can grow tired of the selection playing. When the sound of pots and pans stops, you only have a short amount of time to change the music. The Global Music Box can also soothe her."),
-        AnimatronicCell::create("Foxy.png", "Foxy", "He will gradually leave Pirate's Cove if you don't check on him regularly. Once he is out, he will enter your office piece by piece."),
-        AnimatronicCell::create("Toy_Freddy.png", "Toy Freddy", "He sits in the Parts and Service room playing Five Nights With Mr. Hugs on his big screen TV. Click the cams on Toy Freddy's monitor, then be sure that the appropriate door is closed to prevent Mr. Hugs from jumpscaring him."),
-        AnimatronicCell::create("Toy_Bonnie.png", "Toy Bonnie", "Put on your Freddy Fazbear mask quickly when he sneaks into your room to fool him and make him go away."),
-        AnimatronicCell::create("Toy_Chica.png", "Toy Chica", "Put on your Freddy Fazbear mask quickly when she sneaks into your room to fool her and make her go away."),
-        AnimatronicCell::create("Mangle.png", "Mangle", "Unlike the other animatronics in the vents, once Mangle reaches the vent opening he will never leave. Use the vent-snare to prevent her from making it that far."),
-        AnimatronicCell::create("BB.png", "BB", "He will try to sneak in through the side vent. Close the side vent and wait until you hear a thud indicating he is gone. If BB slips in, he will temporarily disable your flashlight."),
-        AnimatronicCell::create("JJ.png", "JJ", "She will try to sneak in through the side vent. Close the side vent and wait until you hear a thud indicating she is gone. If JJ slips in, she will disable door controls temporarily."),
-        AnimatronicCell::create("Witherd_Chica.png", "Withered Chica", "She climbs through the air vents, but may get stuck when trying to enter your office. Use the vent-snare to prevent her from reaching the opening."),
-        AnimatronicCell::create("Toilet_Bonnie.png", "Withered Bonnie", "He will appear in your office poised to attack! Throw on your Freddy mask to make him leave again."),
-        AnimatronicCell::create("Puppet.png", "The Puppet", "Keep his music box wound or he will come to get you! The global music box also works against him."),
-        AnimatronicCell::create("Golden_Freddy.png", "Golden Freddy", "He will occasionally appear in your office. Throw on your Freddy mask or pull up your monitor quickly to cause him to disappear."),
-        AnimatronicCell::create("Springtrap.png", "Springtrap", "He makes his way toward the vent opening embedded in the wall in front of you. When he is poised to attack you will see his face looking down at you. Close the vent door to send him away."),
-        AnimatronicCell::create("Phantom_Mangle.png", "Phantom Mangle", "When you see him on your monitor, quickly close it, or he will appear in your office and create an audio disturbance."),
-        AnimatronicCell::create("Phantom_Freddy.png", "Phantom Freddy", "Shine your flashlight on him to cause him to fade away. If you don't, he will jumpscare you, giving time for enemies in the vents to sneak into your office. Heat causes him to appear faster."),
-        AnimatronicCell::create("Phantom_BB.png", "Phantom BB", "When he appears on your monitor, quickly close it or change the cam to avoid his jumpscare."),
-        AnimatronicCell::create("Nightmare_Freddy.png", "Nightmare Freddy", "When the Freddles begin to accumulate in your office, shine your flashlight on them before Freddy appears!"),
-        AnimatronicCell::create("Nightmare_Bonnie.png", "Nightmare Bonnie", "Buy his plush from the Prize Counter when he appears in the hallway to avoid his jumpscare. He can't be stopped by the office door."),
-        AnimatronicCell::create("Nightmare_Freadbear.png", "Nightmare Fredbear", "He is invisible to the cameras and can only be seen when he reaches your left doorway. Close the door on his face to send him back into the darkness!"),
-        AnimatronicCell::create("Nightmare.png", "Nightmare", "He is invisible to the cameras and can only be seen when he reaches your right doorway. Close the door on his face to send him back into the darkness!"),
-        AnimatronicCell::create("Jack_O_Chica.png", "Jack-O-Chica", "When the office heats up, she will appear in both halls at the same time. Close both doors to make her vanish. This won't work if the office is 100 degrees or more."),
-        AnimatronicCell::create("Nightmare_Mangle.png", "Nightmare Mangle", "Purchase his plush toy from the Prize Counter when he appears in the right hall to avoid his attack! He can't be stopped by the office door."),
-        AnimatronicCell::create("Nighmarione.png", "Nightmarionne", "Don't let your mouse cursor linger over Nightmarionne for too long!"),
-        AnimatronicCell::create("Nightmare_BB.png", "Nightmare BB", "When he is slumped over in your office, do not shine your light on him. When he is sitting up however, you must use your flashlight to reset him."),
-        AnimatronicCell::create("Old_Man_Conseqances.png", "Old Man Consequences", "Use the C button to catch a fish when his mini-game appears, otherwise he will lock your monitor for a short time."),
-        AnimatronicCell::create("Baby.png", "Circus Baby", "Purchase her plush toy from the Prize Counter when she appears in the right hall to avoid her attack! The office door can't stop her."),
-        AnimatronicCell::create("ballora.png", "Ballora", "She will approach from the one of the hallways. Listen for which hall she is in and shut the appropriate door."),
-        AnimatronicCell::create("Funtime_Foxy.png", "Funtime Foxy", "Check his curtain to see when his show is set to begin, then be sure to watch his cam at that exact time to postpone the show, otherwise that is when your game will end."),
-        AnimatronicCell::create("Ennerd.png", "Ennard", "Difficult to see on the vent radar, he will make his way toward your office. Listen for the sound cue of squeaking metal, then close the vent."),
-        AnimatronicCell::create("Trash_And_The_Gand.png", "Trash and the Gang", "???*"),
-        AnimatronicCell::create("Helpy.png", "Helpy", "When you see him sitting in your office, click on him quickly, otherwise he will get in your face with an airhorn, agitating sound-sensitive animatronics."),
-        AnimatronicCell::create("HappyFrog.png", "Happy Frog", "She moves through the air ducts making her way toward you. Use the audio-lure to keep her in place. She is immune to the heater."),
-        AnimatronicCell::create("mr.Hippo.png", "Mr. Hippo", "He makes his way toward your office using the air ducts. Use the audio-lure to hold him in place, or the heater to push him back."),
-        AnimatronicCell::create("Pigpatch.png", "Pigpatch", "He makes his way toward your office using the air ducts. Use the audio-lure to hold him in place, or the heater to push him back."),
-        AnimatronicCell::create("neddbear.png", "Nedd Bear", "He climbs through the vent system making his way toward you. Use the audio-lure or the heater to keep him at bay."),
-        AnimatronicCell::create("Orvil.png", "Orville Elephant", "He makes his way toward your office through the air ducts. He isn't often fooled by the audio-lure, but can be pushed back with the heater."),
-        AnimatronicCell::create("Rockstar_Freddy.png", "Rockstar Freddy", "He will occassionally activate and ask for five Faz-Coins. You can alternatively use the heater to cause him to malfunction."),
-        AnimatronicCell::create("Rockstar_Bonnie.png", "Rockstar Bonnie", "When he appears in your office, search the cameras to find his guitar. Click the guitar to send him away."),
-        AnimatronicCell::create("Rockstar_Chica.png", "Rockstar Chica", "Check the left and right hallways, then double-click the wet-floor sign to place it on the same side as Rockstar Chica. She won't enter if the sign is in place."),
-        AnimatronicCell::create("Rockstar_Foxy.png", "Rockstar Foxy", "When you see his parrot, click it, and Rockstar Foxy may offer you some help. This comes with risk, however."),
-        AnimatronicCell::create("MusicMan.png", "Music Man", "Keep the noise down, or you'll begin to hear his cymbals crashing faster and faster eventually leading to a jumpscare."),
-        AnimatronicCell::create("El_Chip.png", "El Chip", "He's just here to promote his new restaurant. Close the ad when it appears."),
-        AnimatronicCell::create("Funtime_Chica.png", "Funtime Chica", "She will appear at random to distract you. There is no way to avoid her."),
-        AnimatronicCell::create("Molten_Freddy.png", "Molten Freddy", "He climbs in the vents, but can avoid the vent snare. Listen for his voice, then shut the vent door before he gets through."),
-        AnimatronicCell::create("ScrapBaby.png", "Scrap Baby", "She will appear on the opposite side of your office desk. When she moves, use a controlled shock!"),
-        AnimatronicCell::create("Afton.png", "Afton", "He will attack once per night, making a lot of noise and causing the lights to flicker before attacking. Close the right vent door to block him."),
-        AnimatronicCell::create("Lefty.png", "Lefty", "He becomes active from noise and heat. He is too far away from the music box to be soothed by it, but the global music box can calm him down."),
-        AnimatronicCell::create("Phone_Guy.png", "Phone Guy", "When he calls, quickly mute him, otherwise it will create a lengthy audio disturbance. The mute button will appear in different places each time.")
+bool customNightLayer::init() {
+    _AnimatronicCellContainer = AnimatronicCellContainer::create(std::vector<AnimatronicCell*>{
+        //row1
+        AnimatronicCell::create("default_gd_cube.png", "Cube", "He will climb through the vents, and he won't be stopped by the front vent door, only from the vent snares. He will not be affected by the silent ventilation."),
+        AnimatronicCell::create("spike.png", "Spike", "He goes through the ducts. He will sometimes listen to the audio lure, and will be pushed back by the heater."),
+        AnimatronicCell::create("shopkeeper.png", "Shopkeeper", "He sits in your office. He will sometimes wake up asking you for 8 coins, you can either make him stop by paying, or by using the heater."),
+        AnimatronicCell::create("clubstepMonster.png", "Clubstep Monster", "He will sometimes start closing his teeth on your head, to stop him you will need to use the Heater."),
+        AnimatronicCell::create("voskeeper.png", "The Keymaster", "He will randomly pick a button and lock it, making it unusable. You will need to click him 5 times for him to go away."),
+        AnimatronicCell::create("basementDemon.png", "Demon Gurdian", "He will sometimes appear in your office, when he does his eyes will have 2 different colors (blue, green, or orange). You will need to look in the cameras for the differently colored key."),
+        AnimatronicCell::create("secretShopkeeper.png", "Scratch", "He will go through the ducts. He can be fooled using the audio lure, or you can use the heater to push him back."),
+        AnimatronicCell::create("customShopkeeper.png", "Potbor", "He sits in cam04. His shop theme will play whenever he is calm, and when the theme stops playing, he will come to kill you. To calm him down again, change the music playing on the music box. If you do that while he isn't angry he will kill you."),
+        AnimatronicCell::create("demonFace.png", "Demon", "He will sometimes climb into the bottom right vent, and if he manages to enter the room, he will disable your flashlight."),
+        AnimatronicCell::create("cotKeeper.png", "The Gate Keeper", "He will sometimes stand in cam02. To stop him, you will need to buy the elder emerald from the shop."),
+        //row2
+        AnimatronicCell::create("theVaultKeeper.png", "Spooky", "He will go through the duct system and he won't be fooled by the audio lure, you can use the heater to push him back."),
+        AnimatronicCell::create("nSwish.png", "nSwish", "She stands behind you in the office. If you make a lot of noise he will get angrier and kill you. The angrier he gets, the more sounds he makes."),
+        AnimatronicCell::create("TMMonster.png", "Time Machine Dinosaur", "He will sometimes appear on the cameras obstructing your view."),
+        AnimatronicCell::create("deadlockedCube.png", "Deadlocked Cubes", "They will sometimes appear on your screen, moving up and down to distract you."),
+        AnimatronicCell::create("TOE2Monster.png", "Theory of Everything II Monster", "He will go through the duct system. He won't always be fooled by the audio lure, you can use the heater to push them back."),
+        AnimatronicCell::create("extremeFace.png", "Extreme Demon", "Before approaching, he will make lots of noise and flash the lights. If you don't close the bottom right vent in time he will kill you."),
+        AnimatronicCell::create("aeonair.png", "Aeon Air", "Aeon is always in Cam01 and will slowly come closer to the door. You need to close the door before he gets to you. He gets faster the warmer it is."),
+        AnimatronicCell::create("npesta.png", "Npesta", "He will appear in your office occasionally. Put on your mask quickly to make him dissapear."),
+        AnimatronicCell::create("technical.png", "Technical", "He slowly comes at you from the left side of the screen. Put on your mask before he gets too close."),
+        AnimatronicCell::create("deadlockedMonsters.png", "Deadlocked Monsters", "A small minigame will sometimes appear on your screen, in which you will need to catch 3 monsters. To do so, press C whenever one is on the + sign in the middle. If you miss 3 times or don't complete the game in time, they will disable your doors for a short while."),
+        //row 3
+        AnimatronicCell::create("zoink.png", "Zoink", "He will sometimes place a fixed hitbox spike on the screen. Don’t linger your mouse over it for too long or else he will hack your computer, killing you in the process."),
+        AnimatronicCell::create("evw.png", "EricVanWilderman", "He sits in cam03. If you make too much noise or the office gets too hot, he will get angry and will kill you. You can calm him down using the power AC."),
+        AnimatronicCell::create("dorami.png", "Dorami", "He climbs through the vents, and he will not be stopped by the vent snare, but he will be stopped by the front vent door. Silent ventilation slows him down."),
+        AnimatronicCell::create("robtop.png", "RobTop", "He resides in cam04. You need to wind up the music box to keep him calm. you can go to cam04 to wind up the music box, or alternatively use the Global Music Box to wind up the music box."),
+        AnimatronicCell::create("doggie.png", "Doggie", "You will find him at cam05. He will slowly open the curtains, and when he fully opens them, he will sprint towards your left door. If you dont close it in time he will kill you."),
+        AnimatronicCell::create("bloodbath.png", "Bloodbath", "It appears inactive in your office. The longer you open the cameras for, the more active it gets, eventually killing you. You can soothe it by activating silent ventilation."),
+        AnimatronicCell::create("astralDevinity.png", "Astral Devinity", "It will sometimes slowly come at you from the right side of the screen. Put on your mask before it gets too close."),
+        AnimatronicCell::create("reqcube.png", "Requiem Cube", "He will sometimes appear in your office. When he does, make sure you click on him before he disappears! Or else he disables your cameras for a few seconds."),
+        AnimatronicCell::create("fireworkSkull.png", "Firework Skull", "He will go through the ducts. He does not listen to the audio lure but will be pushed back by the heater. The Global Music Box speeds him up."),
+        AnimatronicCell::create("B.png", "B", "Small bees will slowly appear in your room. Use your flashlight to get them away. If too many appear, they will kill you."),
+        //row 4
+        AnimatronicCell::create("pressStartSkull.png", "Press Start Skull", "He will sometimes enter your office. Put on your mask to make him go away."),
+        AnimatronicCell::create("Peaceful.png", "Peaceful Silly Guys", "They will sometimes appear on your screen trying to scare you. Press enter to remove them."),
+        AnimatronicCell::create("Clown.png", "Crazy III Clown", "He will go through the vents. He is invisible to the cameras but will make a sound when he is next to the front door. You need to close the vent when he makes the sound. The silent ventilation slows him down, and the powerAC speeds him up."),
+        AnimatronicCell::create("animMonster.png", "Animation Monster", "He will climb through the vents. He can be avoided using the front vent door and vent snares. Unlike the other vent animatronics, the silent ventilation does not slow him down"),
+        AnimatronicCell::create("yata.png", "Yatagarasu Bird", "He will sometimes fly across your office. If his eye is green click him, and if his eye is red, don't."),
+        AnimatronicCell::create("bloodlust.png", "Bloodlust Monster", "He will go through the duct system. He can be fooled using the audio lure."),
+        AnimatronicCell::create("wulzy.png", "Wulzy", "You will sometimes hear his signature WOAH from either side. Close the door that you heard the sound come from before it's too late."),
+        AnimatronicCell::create("solarFlareSun.png", "Solar Flare Sun", "He will manifest more the higher the temperature is, and if he fully appear he will kill you."),
+        AnimatronicCell::create("mindcap.png", "Mindcap", "He will wait at the cam02 corridor. If you don't buy his plushy from the store in time, he will kill you."),
+        AnimatronicCell::create("magmaBound.png", "Magma Bound", "He will climb through the vents. He can't be stopped by the vent snare. When he gets out of the vent you will see his face in the top vent. Close the vent to avoid death. He gets faster the hotter the office is, and will slow down if silent ventilation or powerAC is on."),
+        //row 5
+        AnimatronicCell::create("theEschaton.png", "The Eschaton", "He will sit in your office deactivated. If he gets activated, press him to deactivate him again. If you click him while he is inactive he will instantly kill you."),
+        AnimatronicCell::create("karmaL.png", "KarmaL", "He will sleep on the right side of the office. If he wakes up, flash your light on him. If you flash the light on him while he is asleep, he will instantly kill you."),
+        AnimatronicCell::create("viprin.png", "Viprin", "He will crawl through the vents. Only the vent snare can stop him. Silent ventilation slows him a little."),
+        AnimatronicCell::create("loochi.png", "Loochi", "He will sometimes appear in your cameras. If you look at him for too long, he will disable the cameras and cause a lot of noise."),
+        AnimatronicCell::create("michigun.png", "Muchigun", "He will appear in the hallway on cam02. You need to buy the triple spike in the shop to avoid him. ∆∆∆"),
+        AnimatronicCell::create("riot.png", "Riot", "He will be on cam06. On cam06, he will slowly open the curtain. Before he fully exits you need to go to his camera and click “close curtains” to reset him. If you attempt to reset him when the curtains are fully closed, he will get angry and kill you. The Global Music Box slows him down."),
+        AnimatronicCell::create("spaceUK.png", "SpaceUK", "He sits in Cam08, playing “Five Nights At ZBot” on his PC. You need to help him survive within the game or else he will throw a temper tantrum and kill you."),
+        AnimatronicCell::create("grandpaDemon.png", "Grandpa Demon", "He will stand next to the right or left door. You need to move the floor sign to the side where he is standing to stop him from killing you."),
+        AnimatronicCell::create("SHSnowman.png", "Slaughterhouse Snowman", "He will sometimes appear on cameras, blocking your view. If you look at him for too long, he will disable the cameras."),
+        AnimatronicCell::create("Killbot.png", "Killbot", "When killbot tries to download itself, you will quickly have to stop it from downloading. If you fail to do so in time, it will flash your screen, making lots of noise in the process.")
     },
     50,
     10,
@@ -79,9 +83,9 @@ bool customNightLayer::init() {
     _MenuSideBar->setPosition({524, 157});
     _MenuSideBar->dad = this;
 
-    CCLabelTTF* version = CCTextFieldTTF::create("Ultimate Custom Dash v0.1.0", "chatFont.fnt", 7);
+    CCLabelTTF* version = CCTextFieldTTF::create("Ultimate Custom Dash v1.0.5 - beta", "chatFont.fnt", 7, {200, 200}, CCTextAlignment::kCCTextAlignmentLeft);
 
-    version->setPosition({31,2});
+    version->setPosition({72,-62});
     version->setScale(0.675f);
     version->setZOrder(50);
     this->addChild(version);
@@ -162,12 +166,20 @@ bool customNightLayer::init() {
     this->addChild(BGContainer);
     this->addChild(_MenuSideBar);
 
+    faceScreen = CCSprite::create("blackscreen.png"_spr);
+    faceScreen->setScale(5);
+    faceScreen->setZOrder(100);
+    faceScreen->setOpacity((int)fadeScreenOpacity);
+    this->addChild(faceScreen);
+
     //_MenuSideBar->setVisible(false);
     //_AnimatronicCellContainer->setVisible(false);
 
     this->setTouchMode(kCCTouchesOneByOne);
     this->setTouchEnabled(true);
     setKeypadEnabled(true);
+
+    scheduleUpdate();
 
     return true;
 }
@@ -176,24 +188,42 @@ void customNightLayer::keyBackClicked() {
     if (_officeLayer == nullptr || _PowerUpsLayer == nullptr || _challenges == nullptr){
         CCDirector::sharedDirector()->popSceneWithTransition(0.5f, PopTransition::kPopTransitionFade);
 
-        GameSoundManager::sharedManager()->stopBackgroundMusic();
+        FMODAudioEngine::sharedEngine()->stopAllMusic();
+
+        if (bgMusic != nullptr){
+            bgMusic->RemoveMeAndCleanUpSound();
+            bgMusic = nullptr;
+        }
+
+        audioSources.clear();
 
         GameManager::sharedState()->fadeInMusic("menuLoop.mp3");
     }
 }
 
-void customNightLayer::EnterLayer() {
+void customNightLayer::EnterLayer(float transitionSpeed) {
     auto layer = customNightLayer::create();
     auto scene = CCScene::create();
 
+    if (bgMusic == nullptr){
+        bgMusic = AudioSource::create("Eisoptrophobia.mp3"_spr, FMOD_LOOP_NORMAL, AudioSource::VolumeChannel::Custom);
+        this->addChild(bgMusic);
+    }
+
     scene->addChild(layer);
-    auto transition = CCTransitionFade::create(0.5f, scene);
+    auto transition = CCTransitionFade::create(transitionSpeed, scene);
 
-    GameSoundManager::sharedManager()->stopBackgroundMusic();
-
-    GameManager::sharedState()->fadeInMusic("abb2k.UltimateCustomDash/Eisoptrophobia.wav");
+    FMODAudioEngine::sharedEngine()->stopAllMusic();
 
     CCDirector::sharedDirector()->pushScene(transition);
+}
+
+void customNightLayer::onEnterTransitionDidFinish(){
+    FadeActive = true;
+    if (bgMusic == nullptr){
+        bgMusic = AudioSource::create("Eisoptrophobia.mp3"_spr, FMOD_LOOP_NORMAL, AudioSource::VolumeChannel::Custom);
+        this->addChild(bgMusic);
+    }
 }
 
 bool customNightLayer::ccTouchBegan(CCTouch* touch, CCEvent* e){
@@ -235,4 +265,51 @@ CCSprite* customNightLayer::CreateAnimatedSprite(float speed, int amoutOfFrames,
     spr->runAction(sprAction);
 
     return spr;
+}
+
+void customNightLayer::update(float delta){
+    if (doubleClickTimer > 0){
+        doubleClickTimer -= delta;
+
+        if (doubleClickTimer <= 0){
+            doubleClickTimer = 0;
+        }
+    }
+
+    if (FadeActive){
+        if (fadeScreenOpacity > 0){
+            fadeScreenOpacity -= delta * FadeSpeed;
+
+            if (fadeScreenOpacity <= 0){
+                fadeScreenOpacity = 0;
+            }
+        }
+        else {
+            fadeScreenOpacity = 0;
+        }
+    }
+    else {
+        if (fadeScreenOpacity < 255){
+            fadeScreenOpacity += delta * FadeSpeed;
+
+            if (fadeScreenOpacity >= 255){
+                fadeScreenOpacity = 255;
+            }
+        }
+        else {
+            fadeScreenOpacity = 255;
+        }
+    }
+    faceScreen->setOpacity((int)fadeScreenOpacity);
+
+    if (fadeScreenOpacity == 255){
+        isTransitionReady = true;
+    }
+    else {
+        isTransitionReady = false;
+    }
+
+    if (bgMusic != nullptr){
+        bgMusic->setCustomVolume(Mod::get()->getSavedValue<float>("Game_Volume", 0.5f));
+    }
 }

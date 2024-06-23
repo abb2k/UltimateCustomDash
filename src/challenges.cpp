@@ -20,6 +20,10 @@ bool challenges::init(CCNode* _mainlayer){
     dad = _mainlayer;
     customNightLayer* mainLayer = (customNightLayer*)dad;
 
+    CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(mainLayer);
+    mainLayer->clicking = false;
+    mainLayer->oneTimeClick = false;
+
     CCSprite* bg = CCSprite::create("abb2k.UltimateCustomDash/sidebarBG.png");
     bg->setPosition({526, 161});
     bg->setScaleX(1.175f);
@@ -401,8 +405,13 @@ void challenges::setChallenge(animatronic animatronics[]){
 
 void challenges::keyBackClicked() {
     customNightLayer* mainLayer = (customNightLayer*)dad;
+
+    CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(static_cast<CCLayer*>(mainLayer), 10, true);
+    mainLayer->setTouchEnabled(true);
+    handleTouchPriority(mainLayer);
+
     mainLayer->_challenges = nullptr;
-    GameSoundManager::sharedManager()->playEffect("abb2k.UltimateCustomDash/blip.wav", 1.0f,1.0f,1.0f);
+    mainLayer->addChild(AudioSource::createEffect("blip.mp3"_spr, AudioSource::Custom, 1.5f, Mod::get()->getSavedValue<float>("Game_Volume", 0.5f)));
     mainLayer->_AnimatronicCellContainer->SetAll(0);
 
     this->removeMeAndCleanup();
